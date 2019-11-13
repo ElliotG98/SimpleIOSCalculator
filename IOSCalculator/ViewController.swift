@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         let tv = UILabel()
         tv.text = "0"
         tv.textAlignment = .center
+        tv.font = UIFont.systemFont(ofSize: 25)
         tv.textColor = .gray
         tv.backgroundColor = .white
         tv.frame.size = CGSize(width: 70, height: 60)
@@ -74,9 +75,9 @@ class ViewController: UIViewController {
         button.backgroundColor = .gray
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: CGFloat(width)).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 100).isActive = true
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         return button
     }
     
@@ -91,7 +92,7 @@ class ViewController: UIViewController {
         
         let stackView = UIStackView(arrangedSubviews: [inputTextView, subStackView1, subStackView2, subStackView3, subStackView4, subStackView5])
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         stackView.alignment = .fill
         stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -100,13 +101,11 @@ class ViewController: UIViewController {
         let height = UIScreen.main.bounds.height
         
         view.addSubview(stackView)
-        stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50)
+        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         stackView.widthAnchor.constraint(equalToConstant: width).isActive = true
         stackView.heightAnchor.constraint(equalToConstant: height).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        
     }
     
     func rowCreate(arr: Dictionary<Int, Array<Any>>) -> UIStackView{
@@ -117,12 +116,12 @@ class ViewController: UIViewController {
         
         for (key,val) in arrSorted {
             if arr.count == 2 && key == 1 {
-                w = 260
+                w = Int(UIScreen.main.bounds.width / 2)
                 alphaVal = 1.0
             }else if arr.count == 3 && key == 15 {
-                w = 165
+                w = Int(UIScreen.main.bounds.width / 2)
             }else {
-                w = 80
+                w = Int(UIScreen.main.bounds.width / 4)
             }
             
             if key == 2 || key == 6 || key == 10 || key == 14 || key == 17 {
@@ -133,7 +132,7 @@ class ViewController: UIViewController {
             button.backgroundColor = (val[1] as? UIColor)?.withAlphaComponent(CGFloat(alphaVal))
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: CGFloat(w)).isActive = true
-            button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 100).isActive = true
             button.layer.cornerRadius = CGFloat(0.4 * Double(80))
             button.clipsToBounds = true
             if String(describing: val[0]) == "AC" {
